@@ -23,7 +23,7 @@ def ChangeImage():
         FileName = "dice.00" + str(random.randint(1,6)) + ".png"
         photo.config(file=FileName)
         if next(roll_count) > 0:
-            root.after(80, roll)
+            root.after(100, roll)
     roll()
 
 # 4.Playsoundで音声を再生
