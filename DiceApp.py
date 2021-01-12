@@ -1,27 +1,28 @@
-# 必要なライブラリーを読み込む
 import tkinter as tk
 import random
 
-# 画面の設定
+# 1.tkinterでウィンドウを作成
 root = tk.Tk()
-root.title("Dice.app")
-root.geometry('200x150')
+root.title('DiceApp')
+root.geometry('400x400')
 
-# ボタンが押された時の処理
-def dice(event):
-    # ランダムな整数を生成して、labelの内容を書き換える
-    value["text"] = random.randint(1,6)
+# 2.ラベルクリック時の処理
+def click_func(event):
+    roll_count = iter(range(10)[::-1])
+    def roll():# 3.PhotoImageを十回変更する
+        FileName = "dice.00" + str(random.randint(1,6)) + ".png"
+        photo.config(file=FileName)
+        if next(roll_count) > 0:
+            root.after(80, roll)
+    roll()
 
+# 3. PhotoImageオブジェクト、Buttonオブジェクトを作成
+photo = tk.PhotoImage(file="dice.001.png")
+PhotoLabel = tk.Label(image=photo)
 
-value = tk.Label(text="0",font=("",80))
-value.pack(fill = 'x', padx=20, side = 'top')
+# 4. PhotoImageオブジェクトの表示
+PhotoLabel.bind("<ButtonPress>", click_func)
+PhotoLabel.pack()
 
-
-# ボタンの設定
-Btn = tk.Button(text='サイコロをふる',width=10)
-# ボタンとトリガーを紐ずける
-Btn.bind("<Button-1>", dice)
-# ボタンをプロット
-Btn.pack(fill = 'x', padx=20, side = 'top')
-
+# 5. メインループ
 root.mainloop()
